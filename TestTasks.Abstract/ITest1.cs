@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TestTasks
+namespace TestTasks.Abstract
 {
     /// <summary>
     /// Тест на расширенные знания C#

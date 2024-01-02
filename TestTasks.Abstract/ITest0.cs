@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestTasks
+namespace TestTasks.Abstract
 {
     /// <summary>
     /// Тест на базовые знания C#

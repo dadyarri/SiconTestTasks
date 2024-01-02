@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TestTasks
+﻿namespace TestTasks.Abstract
 {
     /// <summary>
     /// Экспортируемый средствами MEF интерфейс.

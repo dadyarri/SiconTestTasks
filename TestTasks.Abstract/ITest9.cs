@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TestTasks
+﻿namespace TestTasks.Abstract
 {
     /// <summary>
     /// Тест на навыки работы с состояниями (конечные автоматы)

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
-namespace TestTasks
+namespace TestTasks.Abstract
 {
     /// <summary>
     /// Тест на умение работать в многопоточной среде,

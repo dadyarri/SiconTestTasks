@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using System.Globalization;
 
-namespace TestTasks
+namespace TestTasks.Abstract
 {
     /// <summary>
     /// Работа с окружением потока в условиях многопоточности 

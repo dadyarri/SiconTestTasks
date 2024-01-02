@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace TestTasks
+namespace TestTasks.Abstract
 {
     /// <summary>
     /// Тест на работу с рекурсией и преобразованием коллекций
