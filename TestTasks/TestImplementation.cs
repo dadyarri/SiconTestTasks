@@ -9,7 +9,7 @@ using TestTasks.Abstract;
 
 namespace TestTasks
 {
-    public class TestImplementation : ITestImplementation, ITest0, ITest1, ITest2, ITest3, ITest4
+    public class TestImplementation : ITestImplementation, ITest0, ITest1, ITest2, ITest3, ITest4, ITest5
     {
         public string AuthorName => "Голубев Даниил Олегович";
         public Dictionary<string, bool> Case1Structure = new Dictionary<string, bool>();
@@ -406,6 +406,76 @@ namespace TestTasks
             var bf = new BinaryFormatter();
             using var ms = new MemoryStream(binary);
             return (T)bf.Deserialize(ms);
+        }
+
+        #endregion
+
+        #region ITest5
+
+        /// <summary>
+        /// Вернуть "все человечество", рожденное, начиная с переданного в качестве аргумента предка (включительно)
+        /// </summary>
+        /// <param name="oldestHuman"></param>
+        /// <returns></returns>
+        public IEnumerable<HumanWithParent> EnumAllHuman(HumanWithChildren oldestHuman)
+        {
+            return EnumerateHumans(oldestHuman, null);
+        }
+
+        /// <summary>
+        /// Вернуть "все человечество", рожденное, начиная с переданной группы предков (включительно).
+        /// Учесть, что у некоторых родитетей есть общие дети и предпринять меры по исключению дублей в итоговой коллекции
+        /// </summary>
+        /// <param name="oldestHumanGroup"></param>
+        /// <returns></returns>
+        public IEnumerable<HumanWithParent> EnumAllHuman(IEnumerable<HumanWithChildren> oldestHumanGroup)
+        {
+            foreach (var oldestHuman in oldestHumanGroup)
+            {
+                var visitedHumans = new HashSet<string>();
+                foreach (var humanWithParent in EnumerateHumans(oldestHuman, null, visitedHumans))
+                {
+                    yield return humanWithParent;
+                }
+            }
+        }
+
+        private static IEnumerable<HumanWithParent> EnumerateHumans(HumanWithChildren currentHuman,
+            HumanWithChildren parent)
+        {
+            if (currentHuman == null) yield break;
+
+            yield return new HumanWithParent { Name = currentHuman.Name, Parent = parent };
+
+            if (currentHuman.Children == null) yield break;
+
+            foreach (var child in currentHuman.Children)
+            {
+                foreach (var grandchild in EnumerateHumans(child, currentHuman))
+                {
+                    yield return grandchild;
+                }
+            }
+        }
+
+        private static IEnumerable<HumanWithParent> EnumerateHumans(HumanWithChildren currentHuman,
+            HumanWithChildren parent, HashSet<string> visitedHumans)
+        {
+            if (currentHuman == null) yield break;
+
+            if (!visitedHumans.Add(currentHuman.Name)) yield break;
+
+            yield return new HumanWithParent { Name = currentHuman.Name, Parent = parent };
+
+            if (currentHuman.Children == null) yield break;
+
+            foreach (var child in currentHuman.Children)
+            {
+                foreach (var grandchild in EnumerateHumans(child, currentHuman, visitedHumans))
+                {
+                    yield return grandchild;
+                }
+            }
         }
 
         #endregion
