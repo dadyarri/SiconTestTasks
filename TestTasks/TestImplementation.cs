@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace TestTasks
 {
-    public class TestImplementation : ITestImplementation, ITest0, ITest1, ITest2, ITest4
+    public class TestImplementation : ITestImplementation, ITest0, ITest1, ITest2, ITest3, ITest4
     {
         public string AuthorName => "Голубев Даниил Олегович";
         public Dictionary<string, bool> Case1Structure = new Dictionary<string, bool>();
@@ -14,6 +16,9 @@ namespace TestTasks
         public List<User> Case3Structure = new List<User>();
         public Queue<int> Case4Structure = new Queue<int>();
         public Stack<string> Case5Structure = new Stack<string>();
+        private ConcurrentBag<Car> Test3Structure = new ConcurrentBag<Car>();
+
+        #region ITest0
 
         /// <summary>
         /// Проверить, является ли число четным
@@ -86,6 +91,10 @@ namespace TestTasks
         {
             return value.Length == 0;
         }
+
+        #endregion
+
+        #region ITest1
 
         /// <summary>
         /// Вернуть коллекцию строк в виде одной строки с разделителем
@@ -180,6 +189,10 @@ namespace TestTasks
                 yield return i;
             }
         }
+
+        #endregion
+
+        #region ITest2
 
         /// <summary>
         /// В систему добавили нового пользователя
@@ -285,6 +298,60 @@ namespace TestTasks
             return isSucceeded ? result : null;
         }
 
+        #endregion
+
+        #region ITest3
+
+        /// <summary>
+        /// Добавить информацию об автомобиле.
+        /// Учесть, что вызов может быть осуществлен одновременно из нескольких параллельных потоков.
+        /// </summary>
+        /// <param name="car">Информация об автомобиле</param>
+        public void RegisterCar(Car car)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Вернуть информацию о количестве всех автомобилей указанного цвета.
+        /// Метод должен работать максимально быстро.
+        /// Учесть, что вызов возможен из отдельного потока параллельно RegisterCar()
+        /// </summary>
+        /// <param name="color">Требуемый цвет</param>
+        /// <returns></returns>
+        public int GetCountByColor(Color color)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Вернуть массив всех автомобилей указанного цвета и указанной модели.
+        /// Метод должен работать максимально быстро.
+        /// Учесть, что вызов возможен из отдельного потока параллельно RegisterCar()
+        /// </summary>
+        /// <param name="color">Требуемый цвет</param>
+        /// <param name="model">Требуемая модель</param>
+        /// <returns></returns>
+        public Car[] GetCarsByColorAndModel(Color color, string model)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Перечислить все автомобили, выпущенные в указанный период (включительно)
+        /// </summary>
+        /// <param name="dt1"></param>
+        /// <param name="dt2"></param>
+        /// <returns></returns>
+        public IEnumerable<Car> EnumAllReleasedBetween(DateTime dt1, DateTime dt2)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region ITest4
+
         /// <summary>
         /// Создать случайную фигуру со случайными размерами
         /// </summary>
@@ -339,11 +406,14 @@ namespace TestTasks
             using var ms = new MemoryStream(binary);
             return (T)bf.Deserialize(ms);
         }
+
+        #endregion
     }
 
     public class Square : Rectangle
     {
         public new double SideALength { get; set; }
+
         public new double SideBLength
         {
             get => SideALength;
