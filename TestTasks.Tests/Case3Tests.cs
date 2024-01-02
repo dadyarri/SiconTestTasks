@@ -22,7 +22,7 @@ namespace TestTasks.Tests
             _testImplementationFixture.TestImplementation.Case3_NotifyUserSecurityEvent(UserName, true);
             _testImplementationFixture.TestImplementation.Case3_NotifyUserSecurityEvent(UserName, false);
 
-            _testImplementationFixture.TestImplementation.Case3_Structure.Count.Should().Be(4);
+            _testImplementationFixture.TestImplementation.Case3Structure.Count.Should().Be(4);
         }
 
         [Fact]

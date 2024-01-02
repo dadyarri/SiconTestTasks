@@ -9,11 +9,11 @@ namespace TestTasks
     public class TestImplementation : ITestImplementation, ITest0, ITest1, ITest2, ITest4
     {
         public string AuthorName => "Голубев Даниил Олегович";
-        public Dictionary<string, bool> Case1_Structure = new Dictionary<string, bool>();
-        public Dictionary<string, bool> Case2_Structure = new Dictionary<string, bool>();
-        public List<User> Case3_Structure = new List<User>();
-        public Queue<int> Case4_Structure = new Queue<int>();
-        public Stack<string> Case5_Structure = new Stack<string>();
+        public Dictionary<string, bool> Case1Structure = new Dictionary<string, bool>();
+        public Dictionary<string, bool> Case2Structure = new Dictionary<string, bool>();
+        public List<User> Case3Structure = new List<User>();
+        public Queue<int> Case4Structure = new Queue<int>();
+        public Stack<string> Case5Structure = new Stack<string>();
 
         /// <summary>
         /// Проверить, является ли число четным
@@ -187,7 +187,7 @@ namespace TestTasks
         /// <param name="userName">Логин пользователя</param>
         public void Case1_NotifyUserRegistered(string userName)
         {
-            Case1_Structure.Add(userName, true);
+            Case1Structure.Add(userName, true);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace TestTasks
         /// <returns></returns>
         public int Case1_GetRegisteredUsersCount()
         {
-            return Case1_Structure.Count;
+            return Case1Structure.Count;
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace TestTasks
         /// <returns></returns>
         public string Case2_NotifyMeter(string serialNumber)
         {
-            Case2_Structure.Add(serialNumber, true);
+            Case2Structure.Add(serialNumber, true);
             return serialNumber;
         }
 
@@ -217,7 +217,7 @@ namespace TestTasks
         /// <returns>true - устройство уже есть в коллекции</returns>
         public bool Case2_MeterAlreadyExists(string serialNumber)
         {
-            return Case2_Structure.ContainsKey(serialNumber);
+            return Case2Structure.ContainsKey(serialNumber);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace TestTasks
         /// <param name="userLoggedIn">true - пользователь вошел в систему, false - пользователь вышел</param>
         public void Case3_NotifyUserSecurityEvent(string userName, bool userLoggedIn)
         {
-            Case3_Structure.Add(new User { Username = userName, IsLoggedIn = userLoggedIn });
+            Case3Structure.Add(new User { Username = userName, IsLoggedIn = userLoggedIn });
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace TestTasks
         /// <returns></returns>
         public int Case3_GetUserLoggedInCount(string userName)
         {
-            return Case3_Structure.Count(user => user.Username == userName && user.IsLoggedIn);
+            return Case3Structure.Count(user => user.Username == userName && user.IsLoggedIn);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace TestTasks
         /// <returns></returns>
         public void Case4_NotifyCommand(int commandCode)
         {
-            Case4_Structure.Enqueue(commandCode);
+            Case4Structure.Enqueue(commandCode);
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace TestTasks
         /// <returns>Код команды или null, если команды закончились</returns>
         public int? Case4_TryExtractNextCommand()
         {
-            var isSucceeded = Case4_Structure.TryDequeue(out var commandCode);
+            var isSucceeded = Case4Structure.TryDequeue(out var commandCode);
 
             return isSucceeded ? commandCode : (int?)null;
         }
@@ -270,7 +270,7 @@ namespace TestTasks
         /// (не важно, что это, какое-то строковое описание текущего окружения)</param>
         public void Case5_PushContext(string contextDescription)
         {
-            Case5_Structure.Push(contextDescription);
+            Case5Structure.Push(contextDescription);
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace TestTasks
         /// <returns>Последний принятый контекст или null, если извлекать больше нечего</returns>
         public string Case5_PopContext()
         {
-            var isSucceeded = Case5_Structure.TryPop(out var result);
+            var isSucceeded = Case5Structure.TryPop(out var result);
             return isSucceeded ? result : null;
         }
 
