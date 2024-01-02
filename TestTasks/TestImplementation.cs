@@ -309,7 +309,7 @@ namespace TestTasks
         /// <param name="car">Информация об автомобиле</param>
         public void RegisterCar(Car car)
         {
-            throw new NotImplementedException();
+            Test3Structure.Add(car);
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace TestTasks
         /// <returns></returns>
         public int GetCountByColor(Color color)
         {
-            throw new NotImplementedException();
+            return Test3Structure.Count(car => car.Color == color);
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace TestTasks
         /// <returns></returns>
         public Car[] GetCarsByColorAndModel(Color color, string model)
         {
-            throw new NotImplementedException();
+            return Test3Structure.Where(car => car.Color == color && car.Model == model).ToArray();
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace TestTasks
         /// <returns></returns>
         public IEnumerable<Car> EnumAllReleasedBetween(DateTime dt1, DateTime dt2)
         {
-            throw new NotImplementedException();
+            return Test3Structure.Where(car => car.ReleaseDt <= dt1 && car.ReleaseDt >= dt2);
         }
 
         #endregion
